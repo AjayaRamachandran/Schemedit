@@ -2,7 +2,6 @@
 
 from litemapy import Schematic, Region, BlockState
 import random
-import turtle as trtl
 
 #------Setup------
 
@@ -12,15 +11,6 @@ schem = reg.as_schematic(name="Creation1", author="Anonymous", description="Made
 
 # Create the block state we are going to use
 block = BlockState("minecraft:light_blue_concrete")
-
-
-previewScreen = trtl.Screen()
-previewScreen.setup(500,500)
-previewScreen.title('Schematic Preview')
-
-drawer = trtl.Turtle()
-drawer.hideturtle()
-drawer.goto(-100, 0)
 
 #------Functions------
 
@@ -38,17 +28,7 @@ def preview():
     schem = Schematic.load("creation.litematic")
     reg = list(schem.regions.values())[0]
 
-
-    for x in reg.xrange():
-        drawer.goto(drawer.xcor() += 1, drawer.ycor())
-        for y in reg.zrange():
-            drawer.goto()
-            for z in reg.yrange():
-                b = reg.getblock(x, y, z)
-                if b.blockid == "minecraft:air":
-                    drawer.pendown()
-                    drawer.penup()
-
+    
     for x in reg.xrange():
         for z in reg.zrange():
             b = reg.getblock(x, 10, z)

@@ -2,11 +2,12 @@
 
 from litemapy import Schematic, Region, BlockState
 import random
+import structuregeneration as sg
 
 #------Setup------
 
 # Shortcut to create a schematic with a single region
-reg = Region(0, 0, 0, 100, 100, 100)
+reg = Region(0, 0, 0, 21, 21, 21)
 schem = reg.as_schematic(name="Creation1", author="Anonymous", description="Made with Schematic Editor, Powered by Litemapy")
 
 # Create the block state we are going to use
@@ -16,9 +17,14 @@ block = BlockState("minecraft:light_blue_concrete")
 
 # Build the schematic
 def genStruct():
-    for x, y, z in reg.allblockpos():
-        if random.randint(0,1) == 1:
-            reg.setblock(x, y, z, block)
+    data = sg.createHouse()
+    item = 0
+    for z, y, x in reg.allblockpos():
+        #print(z,y,x)
+        item = (z+1)*441 + (y)*21 + x
+        if item < len(data):
+            if data[item] == "minecraft:light_blue_concrete":
+                reg.setblock(z, y, x, block)
 
 
 # Preview the schematic
@@ -49,5 +55,3 @@ schem.save("creation.litematic")
 
 
 preview()
-
-previewScreen.mainloop()

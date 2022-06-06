@@ -74,10 +74,16 @@ def openPreview():
     renderText = tk.Label(renderFrame, text="Creating House...")
     renderText.pack()
 
-    name = asksaveasfile(initialfile = 'Creation.litematic', mode='w',defaultextension=".litematic", filetypes=[("Litematica Schematics","*.litematic")])
-    text2save = str(open("creation.litematic"))
+    name = asksaveasfile(initialfile = 'Creation.litematic', mode='wb',defaultextension=".litematic", filetypes=[("Litematica Schematics","*.litematic")])
+    schematicFile = open("creation.litematic", "rb")
+    text2save = bytearray(schematicFile.read())
+    #print(schematicFile)
     name.write(text2save)
     name.close
+
+    root.destroy()
+    root2.destroy()
+
 
 #renderFrame.tkraise()
 openingFrame.tkraise()

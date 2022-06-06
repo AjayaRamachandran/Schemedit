@@ -43,46 +43,60 @@ def checkIfInRange(x,z,y,c1x,c1z,c1y,c2x,c2z,c2y):
             inRange = False
     return inRange
 
-def fill(x1,z1,y1,x2,z2,y2,material):
+def fill(x1,z1,y1,x2,z2,y2,material,material2,texture):
     for cell in range(len(cells)):
         cellx = cell % 21
         cellz = (np.floor(cell / 21)) % 21
         celly = np.floor(cell / 441)
         if checkIfInRange(cellx,cellz,celly,x1,z1,y1,x2,z2,y2) == True:
-            cells[cell] = material
+            if texture:
+                choice = rand.randint(0,1)
+                if choice == 0:
+                    cells[cell] = material
+                else:
+                    cells[cell] = material2
+            else:
+                cells[cell] = material
 
 def base():
     x1 = 3
-    z1 = 6
+    z1 = 3
     y1 = 1
     x2 = 18
-    z2 = 15
-    y2 = 10
-    fill(x1,z1,y1,x2,z2,y2,"minecraft:stone")
+    z2 = 18
+    y2 = 5
+    fill(x1,z1,y1,x2,z2,y2,"minecraft:stone", "minecraft:andesite", texture=True)
+    x1 = 1
+    z1 = 1
+    y1 = 1
+    x2 = 21
+    z2 = 21
+    y2 = 1
+    fill(x1,z1,y1,x2,z2,y2,"minecraft:grass_block", texture=True)
 
 def emptyBox():
     # initialiye coordinates
-    x1 = rand.randint(3,10)
-    z1 = rand.randint(3,10)
-    y1 = rand.randint(1,10)
-    x2 = rand.randint(12,19)
-    z2 = rand.randint(12,19)
-    y2 = rand.randint(11,20)
+    x1 = rand.randint(7,11)
+    z1 = rand.randint(3,6)
+    y1 = rand.randint(3,9)
+    x2 = x1 + rand.randint(7,9)
+    z2 = rand.randint(15,18)
+    y2 = y1 + rand.randint(7,10)
 
-    fill(x1,z1,y1,x2,z2,y2,"minecraft:smooth_quarty_block")
-    fill(x1+1,z1,y1+1,x2-1,z2,y2-1,"minecraft:air")
+    fill(x1,z1,y1,x2,z2,y2,"minecraft:smooth_quartz", texture=False)
+    fill(x1+1,z1,y1+1,x2-1,z2,y2-1,"minecraft:air", texture=False)
 
 def coveredBox():
     # initialiye coordinates
-    x1 = rand.randint(3,10)
-    z1 = rand.randint(3,10)
-    y1 = rand.randint(1,10)
-    x2 = rand.randint(12,19)
-    z2 = rand.randint(12,19)
-    y2 = rand.randint(11,20)
+    x1 = rand.randint(3,6)
+    z1 = rand.randint(3,6)
+    y1 = rand.randint(1,6)
+    x2 = x1 + rand.randint(7,9)
+    z2 = rand.randint(15,18)
+    y2 = y1 + rand.randint(5,8)
 
-    fill(x1,z1,y1,x2,z2,y2,"minecraft:oak_planks")
-    fill(x1+1,z1+1,y1+1,x2-1,z2-1,y2-1,"minecraft:air")
+    fill(x1,z1,y1,x2,z2,y2,"minecraft:oak_planks", texture=False)
+    fill(x1+1,z1+1,y1+1,x2-1,z2-1,y2-1,"minecraft:air", texture=False)
 
 
 
@@ -95,8 +109,9 @@ def createHouse():
     #fill(6,6,6,19,19,19,"minecraft:light_blue_concrete")
 
     base()
-    emptyBox()
     coveredBox()
+    emptyBox()
+    
 
     #print(cells)
     return cells

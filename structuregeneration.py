@@ -60,10 +60,10 @@ def fill(x1,z1,y1,x2,z2,y2,material,material2,texture):
 
 def base():
     x1 = 3
-    z1 = 3
+    z1 = 6
     y1 = 1
     x2 = 18
-    z2 = 18
+    z2 = 15
     y2 = 5
     fill(x1,z1,y1,x2,z2,y2,"minecraft:stone", "minecraft:andesite", texture=True)
     x1 = 1
@@ -72,10 +72,17 @@ def base():
     x2 = 21
     z2 = 21
     y2 = 1
-    fill(x1,z1,y1,x2,z2,y2,"minecraft:grass_block", texture=True)
+    fill(x1,z1,y1,x2,z2,y2,"minecraft:grass_block", "minecraft:moss_block", texture=True)
+    x1 = 4
+    z1 = 8
+    y1 = 1
+    x2 = 17
+    z2 = 13
+    y2 = 15
+    fill(x1,z1,y1,x2,z2,y2,"minecraft:gray_concrete", "", texture=False)
 
 def emptyBox():
-    # initialiye coordinates
+    # initialize coordinates
     x1 = rand.randint(7,11)
     z1 = rand.randint(3,6)
     y1 = rand.randint(3,9)
@@ -83,11 +90,13 @@ def emptyBox():
     z2 = rand.randint(15,18)
     y2 = y1 + rand.randint(7,10)
 
-    fill(x1,z1,y1,x2,z2,y2,"minecraft:smooth_quartz", texture=False)
-    fill(x1+1,z1,y1+1,x2-1,z2,y2-1,"minecraft:air", texture=False)
+    fill(x1,z1,y1,x2,z2,y2,"minecraft:smooth_quartz", "", texture=False)
+    fill(x1+1,z1,y1+1,x2-1,z2,y2-1,"minecraft:air", "", texture=False)
+    fill(x1+1,z1+1,y1+1,x2-1,z1+1,y2-1,"minecraft:white_stained_glass", "", texture=False)
+    fill(x1+1,z2-1,y1+1,x2-1,z2-1,y2-1,"minecraft:white_stained_glass", "", texture=False)
 
 def coveredBox():
-    # initialiye coordinates
+    # initialize coordinates
     x1 = rand.randint(3,6)
     z1 = rand.randint(3,6)
     y1 = rand.randint(1,6)
@@ -95,8 +104,26 @@ def coveredBox():
     z2 = rand.randint(15,18)
     y2 = y1 + rand.randint(5,8)
 
-    fill(x1,z1,y1,x2,z2,y2,"minecraft:oak_planks", texture=False)
-    fill(x1+1,z1+1,y1+1,x2-1,z2-1,y2-1,"minecraft:air", texture=False)
+    fill(x1,z1,y1,x2,z2,y2,"minecraft:oak_planks", "", texture=False)
+    fill(x1+1,z1+1,y1+1,x2-1,z2-1,y2-1,"minecraft:air", "", texture=False)
+
+def hedge(x):
+    headerStart = 3
+    headerGoal = 18
+    for i in range(headerGoal-headerStart):
+        y = 2
+        z = i
+        item = (y+1)*441 + (z)*21 + x
+        cells[item] = "minecraft:spruce_log"
+        y = 3
+        z = i
+        item = (y+1)*441 + (z)*21 + x
+        cells[item] = "minecraft:oak_leaves"
+        y = 4
+        z = i
+        item = (y+1)*441 + (z)*21 + x
+        cells[item] = "minecraft:oak_leaves"
+
 
 
 
@@ -111,6 +138,8 @@ def createHouse():
     base()
     coveredBox()
     emptyBox()
+    hedge(21)
+    hedge(1)
     
 
     #print(cells)

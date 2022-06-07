@@ -61,9 +61,17 @@ root.title("Schemedit v1.0.1")
 openingFrame = tk.Frame(root, bg="black")
 openingFrame.grid(padx=200,pady=200)
 
+img = tk.PhotoImage(file="Schemedit.png")
+label = tk.Label(
+    root,
+    image=img
+)
+label.place(x=0, y=0)
+
 
 
 def openPreview():
+    '''
     root2 = tk.Tk()
     root2.geometry("200x100")
     root2.title("Rendering House")
@@ -73,6 +81,7 @@ def openPreview():
 
     renderText = tk.Label(renderFrame, text="Creating House...")
     renderText.pack()
+    '''
 
     name = asksaveasfile(initialfile = 'Creation.litematic', mode='wb',defaultextension=".litematic", filetypes=[("Litematica Schematics","*.litematic")])
     schematicFile = open("creation.litematic", "rb")
@@ -82,14 +91,14 @@ def openPreview():
     name.close
 
     root.destroy()
-    root2.destroy()
+    #root2.destroy()
 
 
 #renderFrame.tkraise()
 openingFrame.tkraise()
 
-startText = tk.Label(openingFrame, text="Schemedit v1.0.1")
-startText.pack()
+#startText = tk.Label(openingFrame, text="Schemedit v1.0.1")
+#startText.pack()
 
 startButton = tk.Button(openingFrame, text="Generate House", command=openPreview)
 startButton.pack()

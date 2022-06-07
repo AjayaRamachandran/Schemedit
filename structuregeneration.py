@@ -110,19 +110,21 @@ def coveredBox():
 def hedge(x):
     headerStart = 3
     headerGoal = 18
-    for i in range(headerGoal-headerStart):
+    header = headerStart
+    while header < headerGoal:
         y = 2
-        z = i
-        item = (y+1)*441 + (z)*21 + x
-        cells[item] = "minecraft:spruce_log"
+        z = header
+        fill(x,z,y,x,z,y,"minecraft:spruce_log", "", texture=False)
+        
         y = 3
-        z = i
-        item = (y+1)*441 + (z)*21 + x
-        cells[item] = "minecraft:oak_leaves"
+        z = header
+        fill(x,z,y,x,z,y,"minecraft:oak_leaves", "", texture=False)
+        
         y = 4
-        z = i
-        item = (y+1)*441 + (z)*21 + x
-        cells[item] = "minecraft:oak_leaves"
+        z = header
+        fill(x,z,y,x,z,y,"minecraft:oak_leaves", "", texture=False)
+        
+        header += 2
 
 
 
@@ -138,7 +140,7 @@ def createHouse():
     base()
     coveredBox()
     emptyBox()
-    hedge(21)
+    hedge(20)
     hedge(1)
     
 

@@ -22,19 +22,29 @@ schem = reg.as_schematic(name="Creation1", author="Anonymous", description="Made
 #------Functions------
 
 # Build the schematic
-def genStruct():
-    data = sg.createHouse()
-    item = 0
-    for y, z, x in reg.allblockpos():
-        #print(z,y,x)
-        item = (y+1)*441 + (z)*21 + x
-        if item < len(data):
-            if data[item] != "minecraft:air":
-                reg.setblock(x, y, z, BlockState(data[item]))
+def genStruct(structureType):
+    if structureType == "house":
+        data = sg.createHouse()
+        item = 0
+        for y, z, x in reg.allblockpos():
+            #print(z,y,x)
+            item = (y+1)*441 + (z)*21 + x
+            if item < len(data):
+                if data[item] != "minecraft:air":
+                    reg.setblock(x, y, z, BlockState(data[item]))
+    elif structureType == "terrain":
+        data = sg.createTerrain()
+        item = 0
+        for y, z, x in reg.allblockpos():
+            #print(z,y,x)
+            item = (y+1)*3000 + (z)*30 + x
+            if item < len(data):
+                if data[item] != "minecraft:air":
+                    reg.setblock(x, y, z, BlockState(data[item]))
 
 
-# Preview the schematic
-def preview():
+# SaveMenu the schematic
+def saveMenu():
 
     # Load the schematic and get its first region
     schem = Schematic.load("creation.litematic")
@@ -70,7 +80,7 @@ label.place(x=0, y=0)
 
 
 
-def openPreview():
+def openSaveMenu():
     '''
     root2 = tk.Tk()
     root2.geometry("200x100")
@@ -93,6 +103,10 @@ def openPreview():
     root.destroy()
     #root2.destroy()
 
+def house():
+    genStruct()
+    saveMenu()
+
 
 #renderFrame.tkraise()
 openingFrame.tkraise()
@@ -100,21 +114,21 @@ openingFrame.tkraise()
 #startText = tk.Label(openingFrame, text="Schemedit v1.0.1")
 #startText.pack()
 
-startButton = tk.Button(openingFrame, text="Generate House", command=openPreview)
+startButton = tk.Button(openingFrame, text="Generate House", command=openSaveMenu)
 startButton.pack()
 
 
 
 
 
-genStruct()
+#genStruct()
 
 
 # Save the schematic
 schem.save("creation.litematic")
 
 
-preview()
+#saveMenu()
 
 
 #------Mainloop------

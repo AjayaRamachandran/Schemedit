@@ -1,4 +1,4 @@
-<img src=https://i.ibb.co/xSQP99B/Minecraft-world1.jpg width="1000" height="125">
+<img src=https://i.ibb.co/xSQP99B/Minecraft-world1.jpg width="1000" height="140">
 # Schemedit for Minecraft
 
 Schemedit is a useful tool in automatically generating different structures for Minecraft. The structures can be locally saved as a .litematic file, which can be opened in minecraft using the Litematica mod. Schemedit allows users to automatically generate complex schematics, like detailed houses (which are randomly generated and unique, but have a distinct style) or natural terrain, with the ability to customize biome types for absolute control.

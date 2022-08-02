@@ -78,7 +78,7 @@ root.title("Schemedit v1.0.1")
 openingFrame = tk.Frame(root, bg="#c9c9c9")
 openingFrame.grid(padx=180,pady=200)
 
-img = tk.PhotoImage(file="Schemedit.png")
+img = tk.PhotoImage(file="Schemedit2.png")
 label = tk.Label(
     root,
     image=img
@@ -149,7 +149,9 @@ openingFrame.tkraise()
 house = tk.Button(openingFrame, text="Generate Modern House ", command=house)
 house.grid(row=0,column=0)
 
-emptyspace1 = tk.Label(openingFrame, text="", bg="#c9c9c9", pady=20)
+img2 = tk.PhotoImage(file="Terrain.png")
+
+emptyspace1 = tk.Label(openingFrame, image=img2, bg="#c9c9c9")
 emptyspace1.grid(row=1,column=0)
 
 plains = tk.Button(openingFrame, text="Generate Plains", command=plains)

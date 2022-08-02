@@ -160,7 +160,7 @@ def createTerrain(environmentType):
             elevationData.append(rand.randint(5,20))
             newElevationData.append(0)
 
-    if environmentType == "mountain":
+    if environmentType == "hills":
         for num in range(15):
             for i in range(len(elevationData)):
                 if i > 80 and i < 6320:
@@ -172,15 +172,142 @@ def createTerrain(environmentType):
                 elevationData[i] = newElevationData[i]
 
             for i in range(len(elevationData)):
-                elevationData[i] = ((elevationData[i] - 12.5) * 1.2) + 12.5
-    
-    for cell in range(len(cells)):
-        cellx = cell % 80
-        cellz = (np.floor(cell / 80)) % 80
-        celly = np.floor(cell / 6400)
+                elevationData[i] = ((elevationData[i] - 12.5) * 1.15) + 12.5
+        
+        for cell in range(len(cells)):
+            cellx = cell % 80
+            cellz = (np.floor(cell / 80)) % 80
+            celly = np.floor(cell / 6400)
 
-        if celly <= elevationData[int(cellz * 80 + cellx)]:
-            cells[cell] = "minecraft:stone"
+            if celly == np.round(elevationData[int(cellz * 80 + cellx)]): #if block is on the surface, make it grass
+                cells[cell] = "minecraft:grass_block"
+            elif celly <= elevationData[int(cellz * 80 + cellx)] and celly > elevationData[int(cellz * 80 + cellx)] - rand.randint(2,5): # if block is near surface, make it dirt
+                cells[cell] = "minecraft:dirt"
+            elif celly <= elevationData[int(cellz * 80 + cellx)]: # if block is below that, make it mostly stone but partly andesite
+                blockChance = rand.randint(1,4)
+                if blockChance == 1:
+                    cells[cell] = "minecraft:andesite"
+                else:
+                    cells[cell] = "minecraft:stone"
+
+
+
+    elif environmentType == "plains":
+        for num in range(20):
+            for i in range(len(elevationData)):
+                if i > 80 and i < 6320:
+                    newElevationData[i] = (elevationData[i] + elevationData[i + 1] + elevationData[i - 1] + elevationData [i + 80] + elevationData [i - 80]) / 5
+                else:
+                    newElevationData[i] = (elevationData[i] + 12.5) / 2
+
+            for i in range(len(elevationData)):
+                elevationData[i] = newElevationData[i]
+
+            for i in range(len(elevationData)):
+                elevationData[i] = ((elevationData[i] - 12.5) * 1.02) + 12.5
+        
+        for cell in range(len(cells)):
+            cellx = cell % 80
+            cellz = (np.floor(cell / 80)) % 80
+            celly = np.floor(cell / 6400)
+
+            if celly == np.round(elevationData[int(cellz * 80 + cellx)]): #if block is on the surface, make it grass
+                cells[cell] = "minecraft:grass_block"
+            elif celly <= elevationData[int(cellz * 80 + cellx)] and celly > elevationData[int(cellz * 80 + cellx)] - rand.randint(2,5): # if block is near surface, make it dirt
+                cells[cell] = "minecraft:dirt"
+            elif celly <= elevationData[int(cellz * 80 + cellx)]: # if block is below that, make it mostly stone but partly andesite
+                blockChance = rand.randint(1,4)
+                if blockChance == 1:
+                    cells[cell] = "minecraft:andesite"
+                else:
+                    cells[cell] = "minecraft:stone"
+
+
+
+    elif environmentType == "desert":
+        for num in range(10):
+            for i in range(len(elevationData)):
+                if i > 80 and i < 6320:
+                    newElevationData[i] = (elevationData[i] + elevationData[i + 1] + elevationData[i - 1] + elevationData [i + 80] + elevationData [i - 80]) / 5
+                else:
+                    newElevationData[i] = (elevationData[i] + 12.5) / 2
+
+            for i in range(len(elevationData)):
+                elevationData[i] = newElevationData[i]
+
+            for i in range(len(elevationData)):
+                elevationData[i] = ((elevationData[i] - 12.5) * 1.05) + 12.5
+        
+        for cell in range(len(cells)):
+            cellx = cell % 80
+            cellz = (np.floor(cell / 80)) % 80
+            celly = np.floor(cell / 6400)
+
+            if celly == np.round(elevationData[int(cellz * 80 + cellx)]): #if block is on the surface, make it sand
+                cells[cell] = "minecraft:sand"
+            elif celly <= elevationData[int(cellz * 80 + cellx)] and celly > elevationData[int(cellz * 80 + cellx)] - rand.randint(2,5): # if block is near surface, make it sandstone
+                cells[cell] = "minecraft:sandstone"
+            elif celly <= elevationData[int(cellz * 80 + cellx)]: # if block is below that, make it mostly stone but partly andesite
+                blockChance = rand.randint(1,4)
+                if blockChance == 1:
+                    cells[cell] = "minecraft:andesite"
+                else:
+                    cells[cell] = "minecraft:stone"
+
+
+    
+    elif environmentType == "icespikes":
+        for num in range(10):
+            for i in range(len(elevationData)):
+                if i > 80 and i < 6320:
+                    newElevationData[i] = (elevationData[i] + elevationData[i + 1] + elevationData[i - 1] + elevationData [i + 80] + elevationData [i - 80]) / 5
+                else:
+                    newElevationData[i] = (elevationData[i] + 12.5) / 2
+
+            for i in range(len(elevationData)):
+                elevationData[i] = newElevationData[i]
+
+            for i in range(len(elevationData)):
+                elevationData[i] = ((elevationData[i] - 12.5) * 1.3) + 12.3
+        
+        for cell in range(len(cells)):
+            cellx = cell % 80
+            cellz = (np.floor(cell / 80)) % 80
+            celly = np.floor(cell / 6400)
+
+            if celly <= elevationData[int(cellz * 80 + cellx)]: # if block is below or at surface, make it packed ice
+                cells[cell] = "minecraft:packed_ice"
+
+
+
+    elif environmentType == "amplifiedmesa":
+        for num in range(10):
+            for i in range(len(elevationData)):
+                if i > 80 and i < 6320:
+                    newElevationData[i] = (elevationData[i] + elevationData[i + 1] + elevationData[i - 1] + elevationData [i + 80] + elevationData [i - 80]) / 5
+                else:
+                    newElevationData[i] = (elevationData[i] + 12.5) / 2
+
+            for i in range(len(elevationData)):
+                elevationData[i] = newElevationData[i]
+
+            for i in range(len(elevationData)):
+                elevationData[i] = ((elevationData[i] - 12.5) * 2) + 12.5
+        
+        for cell in range(len(cells)):
+            cellx = cell % 80
+            cellz = (np.floor(cell / 80)) % 80
+            celly = np.floor(cell / 6400)
+
+            if celly <= elevationData[int(cellz * 80 + cellx)]: # if block is below or at surface, make it colored based on elevation
+                if celly > 15:
+                    cells[cell] = "minecraft:orange_terracotta"
+                elif celly > 10:
+                    cells[cell] = "minecraft:brown_terracotta"
+                elif celly > 5:
+                    cells[cell] = "minecraft:white_terracotta"
+                else:
+                    cells[cell] = "minecraft:yellow_terracotta"
     #print(cells[1202])
     
 

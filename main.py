@@ -38,7 +38,7 @@ def genStruct(structureType):
         # Shortcut to create a schematic with a single region
         reg = Region(0, 0, 0, 80, 20, 80)
         schem = reg.as_schematic(name="Creation1", author="Anonymous", description="Made with Schematic Editor, Powered by Litemapy")
-        data = sg.createTerrain()
+        data = sg.createTerrain(environmentType=terrainType)
         item = 0
         for x, y, z in reg.allblockpos():
             #print(z,y,x)
@@ -115,26 +115,31 @@ def house():
     openSaveMenu()
 
 def plains():
+    global terrainType
     terrainType ="plains"
     genStruct(structureType="terrain")
     openSaveMenu()
 
 def hills():
+    global terrainType
     terrainType ="hills"
     genStruct(structureType="terrain")
     openSaveMenu()
 
 def desert():
+    global terrainType
     terrainType ="desert"
     genStruct(structureType="terrain")
     openSaveMenu()
     
 def icespikes():
+    global terrainType
     terrainType ="icespikes"
     genStruct(structureType="terrain")
     openSaveMenu()
 
 def amplifiedmesa():
+    global terrainType
     terrainType ="amplifiedmesa"
     genStruct(structureType="terrain")
     openSaveMenu()

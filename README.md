@@ -12,6 +12,8 @@ The modern house generator is an automatic engine that produces interesting mode
 
 The landscape generator is an automatic engine which produces unique and visually interesting landscapes with the ability to choose which biome it will generate. The biome specification changes many different things, from the block types all the way to the smoothness and vertical amplitude of the landscape's peaks and valleys. This allows the user to generate natural-looking environments but with the customization that regular minecraft doesn't really allow. The shape of the landscape is determined by a series of subsequent processes. It begins with random noise, then uses neighboring averages to "blur" the bitmap. Then the new blurred image is amplfied a bit (to avoid flatness) before it is blurred yet again. The blurring process runs a certain amount of times depending on which type of environment is selected.
 
+<img src=https://https://i.ibb.co/zf0NMM9/Blur-Model.png width="1000" height="140">
+
 Types of landscapes include: Plains, Desert, Mountains, Ice Spikes, and Amplified Mesa.
 
 ### Exporting

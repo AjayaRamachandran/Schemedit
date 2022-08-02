@@ -12,10 +12,7 @@ from tkinter.filedialog import asksaveasfile
 
 #------Setup------
 
-# Shortcut to create a schematic with a single region
-reg = Region(0, 0, 0, 21, 21, 21)
-schem = reg.as_schematic(name="Creation1", author="Anonymous", description="Made with Schematic Editor, Powered by Litemapy")
-
+schem = ""
 # Create the block state we are going to use
 #block = BlockState("minecraft:light_blue_concrete")
 
@@ -24,6 +21,9 @@ schem = reg.as_schematic(name="Creation1", author="Anonymous", description="Made
 # Build the schematic
 def genStruct(structureType):
     if structureType == "house":
+        # Shortcut to create a schematic with a single region
+        reg = Region(0, 0, 0, 21, 21, 21)
+        schem = reg.as_schematic(name="Creation1", author="Anonymous", description="Made with Schematic Editor, Powered by Litemapy")
         data = sg.createHouse()
         item = 0
         for y, z, x in reg.allblockpos():
@@ -32,19 +32,25 @@ def genStruct(structureType):
             if item < len(data):
                 if data[item] != "minecraft:air":
                     reg.setblock(x, y, z, BlockState(data[item]))
+
     elif structureType == "terrain":
+        # Shortcut to create a schematic with a single region
+        reg = Region(0, 0, 0, 80, 20, 80)
+        schem = reg.as_schematic(name="Creation1", author="Anonymous", description="Made with Schematic Editor, Powered by Litemapy")
         data = sg.createTerrain()
         item = 0
-        for y, z, x in reg.allblockpos():
+        for x, y, z in reg.allblockpos():
             #print(z,y,x)
-            item = (y+1)*3000 + (z)*30 + x
+            item = (y+1)*6400 + (z)*80 + x
             if item < len(data):
                 if data[item] != "minecraft:air":
                     reg.setblock(x, y, z, BlockState(data[item]))
 
+    schem.save("creation.litematic")
 
-# SaveMenu the schematic
-def saveMenu():
+
+# preview the schematic
+def preview():
 
     # Load the schematic and get its first region
     schem = Schematic.load("creation.litematic")
@@ -104,8 +110,12 @@ def openSaveMenu():
     #root2.destroy()
 
 def house():
-    genStruct()
-    saveMenu()
+    genStruct(structureType="house")
+    openSaveMenu()
+
+def terrain():
+    genStruct(structureType="terrain")
+    openSaveMenu()
 
 
 #renderFrame.tkraise()
@@ -114,8 +124,11 @@ openingFrame.tkraise()
 #startText = tk.Label(openingFrame, text="Schemedit v1.0.1")
 #startText.pack()
 
-startButton = tk.Button(openingFrame, text="Generate House", command=openSaveMenu)
-startButton.pack()
+house = tk.Button(openingFrame, text="Generate House ", command=house)
+house.pack()
+
+terrain = tk.Button(openingFrame, text="Generate Terrain", command=terrain)
+terrain.pack()
 
 
 
@@ -125,7 +138,7 @@ startButton.pack()
 
 
 # Save the schematic
-schem.save("creation.litematic")
+#schem.save("creation.litematic")
 
 
 #saveMenu()

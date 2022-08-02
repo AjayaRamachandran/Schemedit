@@ -147,3 +147,42 @@ def createHouse():
     #print(cells)
     return cells
     
+def createTerrain():
+    global cells
+    cells = []
+    elevationData = []
+    for i in range(128000): # formats list
+        cells.append("minecraft:air")
+
+    newElevationData = []
+    for x in range(80): # randomly generates height values
+        for z in range(80):
+            elevationData.append(rand.randint(5,20))
+            newElevationData.append(0)
+
+    for num in range(15):
+        for i in range(len(elevationData)):
+            if i > 80 and i < 6320:
+                newElevationData[i] = (elevationData[i] + elevationData[i + 1] + elevationData[i - 1] + elevationData [i + 80] + elevationData [i - 80]) / 5
+            else:
+                newElevationData[i] = (elevationData[i] + 12.5) / 2
+
+        for i in range(len(elevationData)):
+            elevationData[i] = newElevationData[i]
+
+        for i in range(len(elevationData)):
+            elevationData[i] = ((elevationData[i] - 12.5) * 1.2) + 12.5
+    
+    for cell in range(len(cells)):
+        cellx = cell % 80
+        cellz = (np.floor(cell / 80)) % 80
+        celly = np.floor(cell / 6400)
+
+        if celly <= elevationData[int(cellz * 80 + cellx)]:
+            cells[cell] = "minecraft:stone"
+    #print(cells[1202])
+    
+
+    #print(cells)
+    return cells
+

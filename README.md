@@ -4,15 +4,17 @@ Schemedit is a useful tool in automatically generating different structures for 
 
 ### Modes
 
-Schemedit has (as of June 2022) TWO different editors, including a modern house generator and a landscape generator.
+Schemedit has (as of August 2022) TWO different main editors, including a modern house generator and a versatile landscape generator.
 
 The modern house generator is an automatic engine that produces interesting modern house designs that are visually unique every time they are generated. The shape and style of the elements are governed by parameters within the code, which changes them randomly with each iteration. Some of the elements include open-faced boxes, closed boxes, grill-type faces, and hedge gardens.
 
-The landscape generator is an automatic engine which produce unique and visually interesting landscapes with adjustable vertical scale, to provide the best natural-looking environments as easily as possible. The shape of the landscape is determined by a series of subsequent processes. It begins with random noise, then uses neighboring averages to "blur" the bitmap image. Then the new blurred image is clamped (dark gray becomes black, light gray becomes white) before it is blurred yet again. The blur-clamp process runs 5 times after which the details of the environment are large enough to be hills and valleys as opposed to random noise.
+The landscape generator is an automatic engine which produces unique and visually interesting landscapes with the ability to choose which biome it will generate. The biome specification changes many different things, from the block types all the way to the smoothness and vertical amplitude of the landscape's peaks and valleys. This allows the user to generate natural-looking environments but with the customization that regular minecraft doesn't really allow. The shape of the landscape is determined by a series of subsequent processes. It begins with random noise, then uses neighboring averages to "blur" the bitmap. Then the new blurred image is amplfied a bit (to avoid flatness) before it is blurred yet again. The blur-clamp process runs a certain amount of times depending on which type of environment is selected.
+
+Types of landscapes include: Plains, Desert, Mountains, Ice Spikes, and Amplified Mesa.
 
 ### Exporting
 
-Schmedit allows the user to export .litematic files, which can be read and imported into Minecraft using the Litematica mod. Modern House schematics will have dimensions of 21 x 21 x 21, whereas Landscape schematics will have dimensions of 100 x 100 x 30.
+Schmedit allows the user to export .litematic files, which can be read and imported into Minecraft using the Litematica mod. Modern House schematics will have dimensions of 21 x 21 x 21, whereas Landscape schematics will have dimensions of 80 x 80 x 20.
 
 ### Credit
 

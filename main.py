@@ -13,6 +13,7 @@ from tkinter.filedialog import asksaveasfile
 #------Setup------
 
 schem = ""
+terrainType = ""
 # Create the block state we are going to use
 #block = BlockState("minecraft:light_blue_concrete")
 
@@ -74,8 +75,8 @@ root.geometry("500x500")
 root.title("Schemedit v1.0.1")
 
 
-openingFrame = tk.Frame(root, bg="black")
-openingFrame.grid(padx=200,pady=200)
+openingFrame = tk.Frame(root, bg="#c9c9c9")
+openingFrame.grid(padx=180,pady=200)
 
 img = tk.PhotoImage(file="Schemedit.png")
 label = tk.Label(
@@ -113,7 +114,28 @@ def house():
     genStruct(structureType="house")
     openSaveMenu()
 
-def terrain():
+def plains():
+    terrainType ="plains"
+    genStruct(structureType="terrain")
+    openSaveMenu()
+
+def hills():
+    terrainType ="hills"
+    genStruct(structureType="terrain")
+    openSaveMenu()
+
+def desert():
+    terrainType ="desert"
+    genStruct(structureType="terrain")
+    openSaveMenu()
+    
+def icespikes():
+    terrainType ="icespikes"
+    genStruct(structureType="terrain")
+    openSaveMenu()
+
+def amplifiedmesa():
+    terrainType ="amplifiedmesa"
     genStruct(structureType="terrain")
     openSaveMenu()
 
@@ -124,14 +146,26 @@ openingFrame.tkraise()
 #startText = tk.Label(openingFrame, text="Schemedit v1.0.1")
 #startText.pack()
 
-house = tk.Button(openingFrame, text="Generate House ", command=house)
-house.pack()
+house = tk.Button(openingFrame, text="Generate Modern House ", command=house)
+house.grid(row=0,column=0)
 
-terrain = tk.Button(openingFrame, text="Generate Terrain", command=terrain)
-terrain.pack()
+emptyspace1 = tk.Label(openingFrame, text="", bg="#c9c9c9", pady=20)
+emptyspace1.grid(row=1,column=0)
 
+plains = tk.Button(openingFrame, text="Generate Plains", command=plains)
+plains.grid(row=2,column=0)
 
+hills = tk.Button(openingFrame, text="Generate Hills", command=hills)
+hills.grid(row=3,column=0)
 
+desert = tk.Button(openingFrame, text="Generate Desert", command=desert)
+desert.grid(row=4,column=0)
+
+icespikes = tk.Button(openingFrame, text="Generate Ice Spikes", command=icespikes)
+icespikes.grid(row=5,column=0)
+
+amplifiedmesa = tk.Button(openingFrame, text="Generate Amplified Mesa", command=amplifiedmesa)
+amplifiedmesa.grid(row=6,column=0)
 
 
 #genStruct()

@@ -147,7 +147,7 @@ def createHouse():
     #print(cells)
     return cells
     
-def createTerrain():
+def createTerrain(environmentType):
     global cells
     cells = []
     elevationData = []
@@ -160,18 +160,19 @@ def createTerrain():
             elevationData.append(rand.randint(5,20))
             newElevationData.append(0)
 
-    for num in range(15):
-        for i in range(len(elevationData)):
-            if i > 80 and i < 6320:
-                newElevationData[i] = (elevationData[i] + elevationData[i + 1] + elevationData[i - 1] + elevationData [i + 80] + elevationData [i - 80]) / 5
-            else:
-                newElevationData[i] = (elevationData[i] + 12.5) / 2
+    if environmentType == "mountain":
+        for num in range(15):
+            for i in range(len(elevationData)):
+                if i > 80 and i < 6320:
+                    newElevationData[i] = (elevationData[i] + elevationData[i + 1] + elevationData[i - 1] + elevationData [i + 80] + elevationData [i - 80]) / 5
+                else:
+                    newElevationData[i] = (elevationData[i] + 12.5) / 2
 
-        for i in range(len(elevationData)):
-            elevationData[i] = newElevationData[i]
+            for i in range(len(elevationData)):
+                elevationData[i] = newElevationData[i]
 
-        for i in range(len(elevationData)):
-            elevationData[i] = ((elevationData[i] - 12.5) * 1.2) + 12.5
+            for i in range(len(elevationData)):
+                elevationData[i] = ((elevationData[i] - 12.5) * 1.2) + 12.5
     
     for cell in range(len(cells)):
         cellx = cell % 80

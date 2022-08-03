@@ -1,7 +1,5 @@
 #------Import------
 
-from tracemalloc import start
-from turtle import bgcolor
 from litemapy import Schematic, Region, BlockState
 import random
 import structuregeneration as sg

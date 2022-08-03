@@ -315,4 +315,3 @@ def createTerrain(environmentType):
 
     #print(cells)
     return cells
-

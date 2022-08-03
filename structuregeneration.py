@@ -49,7 +49,7 @@ def fill(x1,z1,y1,x2,z2,y2,material,material2,texture):
         cellz = (np.floor(cell / 21)) % 21
         celly = np.floor(cell / 441)
         if checkIfInRange(cellx,cellz,celly,x1,z1,y1,x2,z2,y2) == True:
-            if texture:
+            if texture: # If the texture boolean parameter is true, then fill command randomly chooses between two materials
                 choice = rand.randint(0,1)
                 if choice == 0:
                     cells[cell] = material
@@ -65,21 +65,21 @@ def base():
     x2 = 18
     z2 = 15
     y2 = 5
-    fill(x1,z1,y1,x2,z2,y2,"minecraft:stone", "minecraft:andesite", texture=True)
+    fill(x1,z1,y1,x2,z2,y2,"minecraft:stone", "minecraft:andesite", texture=True) # constructs the stone base
     x1 = 1
     z1 = 1
     y1 = 1
     x2 = 21
     z2 = 21
     y2 = 1
-    fill(x1,z1,y1,x2,z2,y2,"minecraft:grass_block", "minecraft:moss_block", texture=True)
+    fill(x1,z1,y1,x2,z2,y2,"minecraft:grass_block", "minecraft:moss_block", texture=True) # creates the flat grass ground
     x1 = 4
     z1 = 8
     y1 = 1
     x2 = 17
     z2 = 13
     y2 = 15
-    fill(x1,z1,y1,x2,z2,y2,"minecraft:gray_concrete", "", texture=False)
+    fill(x1,z1,y1,x2,z2,y2,"minecraft:gray_concrete", "", texture=False) # creates the central concrete mass
 
 def emptyBox():
     # initialize coordinates
@@ -93,7 +93,7 @@ def emptyBox():
     fill(x1,z1,y1,x2,z2,y2,"minecraft:smooth_quartz", "", texture=False)
     fill(x1+1,z1,y1+1,x2-1,z2,y2-1,"minecraft:air", "", texture=False)
     fill(x1+1,z1+1,y1+1,x2-1,z1+1,y2-1,"minecraft:white_stained_glass", "", texture=False)
-    fill(x1+1,z2-1,y1+1,x2-1,z2-1,y2-1,"minecraft:white_stained_glass", "", texture=False)
+    fill(x1+1,z2-1,y1+1,x2-1,z2-1,y2-1,"minecraft:white_stained_glass", "", texture=False) # generates a 4-sided hollow quartz cuboid with the two open sides stained glass
 
 def coveredBox():
     # initialize coordinates
@@ -105,7 +105,7 @@ def coveredBox():
     y2 = y1 + rand.randint(5,8)
 
     fill(x1,z1,y1,x2,z2,y2,"minecraft:oak_planks", "", texture=False)
-    fill(x1+1,z1+1,y1+1,x2-1,z2-1,y2-1,"minecraft:air", "", texture=False)
+    fill(x1+1,z1+1,y1+1,x2-1,z2-1,y2-1,"minecraft:air", "", texture=False) # generates a hollow 6-sided wooden cuboid
 
 def hedge(x):
     headerStart = 3
@@ -125,6 +125,8 @@ def hedge(x):
         fill(x,z,y,x,z,y,"minecraft:oak_leaves", "", texture=False)
         
         header += 2
+
+        # creates the trimmed hedges lining the sides
 
 
 
@@ -161,7 +163,7 @@ def createTerrain(environmentType):
             newElevationData.append(0)
 
     if environmentType == "hills":
-        for num in range(15):
+        for num in range(15): # environment is pretty smooth
             for i in range(len(elevationData)):
                 if i > 80 and i < 6320:
                     newElevationData[i] = (elevationData[i] + elevationData[i + 1] + elevationData[i - 1] + elevationData [i + 80] + elevationData [i - 80]) / 5
@@ -172,7 +174,7 @@ def createTerrain(environmentType):
                 elevationData[i] = newElevationData[i]
 
             for i in range(len(elevationData)):
-                elevationData[i] = ((elevationData[i] - 12.5) * 1.15) + 12.5
+                elevationData[i] = ((elevationData[i] - 12.5) * 1.15) + 12.5 # 1.15 means the vertical variation is relatively high
         
         for cell in range(len(cells)):
             cellx = cell % 80
@@ -193,7 +195,7 @@ def createTerrain(environmentType):
 
 
     elif environmentType == "plains":
-        for num in range(20):
+        for num in range(20): # environment is very smooth
             for i in range(len(elevationData)):
                 if i > 80 and i < 6320:
                     newElevationData[i] = (elevationData[i] + elevationData[i + 1] + elevationData[i - 1] + elevationData [i + 80] + elevationData [i - 80]) / 5
@@ -204,7 +206,7 @@ def createTerrain(environmentType):
                 elevationData[i] = newElevationData[i]
 
             for i in range(len(elevationData)):
-                elevationData[i] = ((elevationData[i] - 12.5) * 1.02) + 12.5
+                elevationData[i] = ((elevationData[i] - 12.5) * 1.02) + 12.5 # 1.02 means that vertical veriation is very low
         
         for cell in range(len(cells)):
             cellx = cell % 80
@@ -225,7 +227,7 @@ def createTerrain(environmentType):
 
 
     elif environmentType == "desert":
-        for num in range(10):
+        for num in range(10): # environment is not smooth
             for i in range(len(elevationData)):
                 if i > 80 and i < 6320:
                     newElevationData[i] = (elevationData[i] + elevationData[i + 1] + elevationData[i - 1] + elevationData [i + 80] + elevationData [i - 80]) / 5
@@ -236,7 +238,7 @@ def createTerrain(environmentType):
                 elevationData[i] = newElevationData[i]
 
             for i in range(len(elevationData)):
-                elevationData[i] = ((elevationData[i] - 12.5) * 1.05) + 12.5
+                elevationData[i] = ((elevationData[i] - 12.5) * 1.05) + 12.5 # 1.05 means that vertical variation is relatively low
         
         for cell in range(len(cells)):
             cellx = cell % 80
@@ -257,7 +259,7 @@ def createTerrain(environmentType):
 
     
     elif environmentType == "icespikes":
-        for num in range(10):
+        for num in range(10): # environment is not smooth
             for i in range(len(elevationData)):
                 if i > 80 and i < 6320:
                     newElevationData[i] = (elevationData[i] + elevationData[i + 1] + elevationData[i - 1] + elevationData [i + 80] + elevationData [i - 80]) / 5
@@ -268,7 +270,7 @@ def createTerrain(environmentType):
                 elevationData[i] = newElevationData[i]
 
             for i in range(len(elevationData)):
-                elevationData[i] = ((elevationData[i] - 12.5) * 1.3) + 12.3
+                elevationData[i] = ((elevationData[i] - 12.5) * 1.3) + 12.3 # 1.3 means that vertical variation is very high
         
         for cell in range(len(cells)):
             cellx = cell % 80
@@ -281,7 +283,7 @@ def createTerrain(environmentType):
 
 
     elif environmentType == "amplifiedmesa":
-        for num in range(10):
+        for num in range(10): # environment is not smooth
             for i in range(len(elevationData)):
                 if i > 80 and i < 6320:
                     newElevationData[i] = (elevationData[i] + elevationData[i + 1] + elevationData[i - 1] + elevationData [i + 80] + elevationData [i - 80]) / 5
@@ -292,7 +294,7 @@ def createTerrain(environmentType):
                 elevationData[i] = newElevationData[i]
 
             for i in range(len(elevationData)):
-                elevationData[i] = ((elevationData[i] - 12.5) * 2) + 12.5
+                elevationData[i] = ((elevationData[i] - 12.5) * 2) + 12.5 # 2 means that vertical variation is extremely high
         
         for cell in range(len(cells)):
             cellx = cell % 80

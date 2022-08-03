@@ -76,7 +76,7 @@ root.title("Schemedit v1.0.1")
 openingFrame = tk.Frame(root, bg="#c9c9c9")
 openingFrame.grid(padx=180,pady=200)
 
-img = tk.PhotoImage(file="Schemedit2.png")
+img = tk.PhotoImage(file="Schemedit.png")
 label = tk.Label(
     root,
     image=img
